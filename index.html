@@ -1,428 +1,422 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arif Bro | All-in-One Multi-Tool Hub</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #0f172a;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 { margin-bottom: 8px; color: #38bdf8; font-size: 2rem; }
+    p.subtitle { margin-bottom: 30px; color: #94a3b8; font-size: 1rem; }
 
-<title>Arif Broh | Portfolio</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#05070d;
-    color:#fff;
-}
-
-/* NAVBAR */
-nav{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 8%;
-    background:rgba(5,7,13,.95);
-    border-bottom:1px solid #182033;
-}
-
-.logo{
-    font-size:23px;
-    font-weight:bold;
-    color:#00eaff;
-}
-
-nav a{
-    color:#ddd;
-    text-decoration:none;
-    margin-left:20px;
-}
-
-nav a:hover{
-    color:#00eaff;
-}
-
-/* HERO */
-.hero{
-    min-height:90vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:40px 20px;
-    background:
-    radial-gradient(circle at 50% 30%,#123b52 0%,#05070d 55%);
-}
-
-.hero h1{
-    font-size:55px;
-    margin-bottom:15px;
-}
-
-.hero h1 span{
-    color:#00eaff;
-    text-shadow:0 0 25px #00eaff;
-}
-
-.hero p{
-    max-width:650px;
-    margin:auto;
-    color:#aeb8c7;
-    font-size:18px;
-}
-
-.btn{
-    display:inline-block;
-    margin-top:28px;
-    padding:13px 28px;
-    background:#00eaff;
-    color:#001016;
-    text-decoration:none;
-    border-radius:8px;
-    font-weight:bold;
-    box-shadow:0 0 20px rgba(0,234,255,.35);
-}
-
-.btn:hover{
-    transform:scale(1.05);
-}
-
-/* SECTIONS */
-section{
-    padding:80px 8%;
-}
-
-.title{
-    text-align:center;
-    color:#00eaff;
-    font-size:34px;
-    margin-bottom:40px;
-}
-
-.about{
-    max-width:800px;
-    margin:auto;
-    text-align:center;
-    color:#aeb8c7;
-    font-size:17px;
-}
-
-/* SKILLS */
-.cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:22px;
-}
-
-.card{
-    background:#0c111d;
-    border:1px solid #1b293c;
-    padding:30px 20px;
-    border-radius:15px;
-    text-align:center;
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-8px);
-    border-color:#00eaff;
-    box-shadow:0 0 25px rgba(0,234,255,.15);
-}
-
-.icon{
-    font-size:40px;
-    margin-bottom:15px;
-}
-
-.card h3{
-    margin-bottom:10px;
-    color:#fff;
-}
-
-.card p{
-    color:#8f9bad;
-}
-
-/* PROJECTS */
-.project{
-    max-width:850px;
-    margin:auto;
-}
-
-.project-box{
-    background:#0c111d;
-    border:1px solid #1b293c;
-    padding:25px;
-    border-radius:15px;
-    margin-bottom:20px;
-}
-
-.project-box h3{
-    color:#00eaff;
-    margin-bottom:8px;
-}
-
-.project-box p{
-    color:#aeb8c7;
-}
-
-/* CONTACT */
-.contact{
-    text-align:center;
-}
-
-.contact p{
-    color:#aeb8c7;
-    margin:10px;
-}
-
-/* FOOTER */
-footer{
-    text-align:center;
-    padding:25px;
-    background:#03050a;
-    color:#667085;
-    border-top:1px solid #182033;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-
-    nav{
-        padding:16px 5%;
+    /* Grid Layout for Tool Cards */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
-    nav div:last-child{
-        display:none;
+    .card {
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      padding: 20px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .hero h1{
-        font-size:38px;
+    .card:hover {
+      border-color: #38bdf8;
+      transform: translateY(-5px);
+      background-color: #334155;
+      box-shadow: 0 10px 20px rgba(56, 189, 248, 0.15);
     }
 
-    .hero p{
-        font-size:16px;
+    .card .icon { font-size: 2.2rem; margin-bottom: 10px; }
+    .card h3 { font-size: 1rem; color: #38bdf8; margin-bottom: 5px; }
+    .card p { font-size: 0.75rem; color: #cbd5e1; }
+
+    /* Modal / Popup Windows Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(5px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 15px;
     }
 
-    section{
-        padding:60px 5%;
+    .modal-content {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 20px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+      position: relative;
+      text-align: center;
+      max-height: 90vh;
+      overflow-y: auto;
     }
 
-    .cards{
-        grid-template-columns:1fr;
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: #ef4444;
+      cursor: pointer;
+      font-weight: bold;
     }
 
-    .title{
-        font-size:29px;
+    /* Common Input/Button styles for tools */
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #fff;
+      border-radius: 6px;
+      outline: none;
     }
-}
-</style>
+    button.btn {
+      padding: 10px 18px;
+      background: #38bdf8;
+      color: #0f172a;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- NAVIGATION -->
-<nav>
+  <h1>Arif Bro Web Hub 🚀</h1>
+  <p class="subtitle">একই পেজে ১৫টি বিভিন্ন সার্ভিস! যেকোনো একটি ব্যবহার করুন:</p>
 
-    <div class="logo">
-        ARIF BROH
+  <!-- 15 Cards -->
+  <div class="grid-container">
+    <div class="card" onclick="openModal('m-snake')"><div class="icon">🐍</div><h3>Snake Game</h3><p>সাপ খেলা</p></div>
+    <div class="card" onclick="openModal('m-chat')"><div class="icon">💬</div><h3>Public Chat</h3><p>মেসেজ করুন</p></div>
+    <div class="card" onclick="openModal('m-photo')"><div class="icon">🎨</div><h3>Photo Filter</h3><p>ছবি কালার ফিল্টার</p></div>
+    <div class="card" onclick="openModal('m-tts')"><div class="icon">🔊</div><h3>Voice Converter</h3><p>টেক্সট থেকে ভয়েস</p></div>
+    <div class="card" onclick="openModal('m-qr')"><div class="icon">📱</div><h3>QR Generator</h3><p>QR কোড তৈরি</p></div>
+    <div class="card" onclick="openModal('m-calc')"><div class="icon">🔢</div><h3>Calculator</h3><p>ক্যালকুলেটর</p></div>
+    <div class="card" onclick="openModal('m-notes')"><div class="icon">📝</div><h3>Quick Notes</h3><p>নোটপ্যাড</p></div>
+    <div class="card" onclick="openModal('m-age')"><div class="icon">📅</div><h3>Age Calculator</h3><p>বয়স হিসাব</p></div>
+    <div class="card" onclick="openModal('m-watch')"><div class="icon">⏱️</div><h3>Stopwatch</h3><p>স্টপওয়াচ</p></div>
+    <div class="card" onclick="openModal('m-todo')"><div class="icon">✅</div><h3>To-Do List</h3><p>কাজের তালিকা</p></div>
+    <div class="card" onclick="openModal('m-pass')"><div class="icon">🔐</div><h3>Password Generator</h3><p>পাসওয়ার্ড তৈরি</p></div>
+    <div class="card" onclick="openModal('m-unit')"><div class="icon">📏</div><h3>Unit Converter</h3><p>মিটার থেকে ফুট</p></div>
+    <div class="card" onclick="openModal('m-color')"><div class="icon">🎨</div><h3>Color Picker</h3><p>কালার কোড</p></div>
+    <div class="card" onclick="openModal('m-ttt')"><div class="icon">❌</div><h3>Tic Tac Toe</h3><p>টিক ট্যাক টো</p></div>
+    <div class="card" onclick="openModal('m-coin')"><div class="icon">🪙</div><h3>Coin Flip</h3><p>টস করুন</p></div>
+  </div>
+
+  <!-- MODALS FOR EACH TOOL -->
+
+  <!-- 1. Snake Game -->
+  <div id="m-snake" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('m-snake')">✕</span>
+      <h3>Snake Game 🐍</h3>
+      <canvas id="gc" width="280" height="280" style="background:#000; margin-top:10px; border-radius:8px;"></canvas>
+      <p style="font-size:0.8rem; margin-top:5px;">কিবোর্ড Arrow key বা অন-স্ক্রিন বাটন ব্যবহার করুন</p>
+      <div style="margin-top:10px;">
+        <button class="btn" onclick="pDir('UP')">⬆️</button><br>
+        <button class="btn" onclick="pDir('LEFT')">⬅️</button>
+        <button class="btn" onclick="pDir('DOWN')">⬇️</button>
+        <button class="btn" onclick="pDir('RIGHT')">➡️</button>
+      </div>
     </div>
+  </div>
 
-    <div>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+  <!-- 2. Public Chat -->
+  <div id="m-chat" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('m-chat')">✕</span>
+      <h3>Public Chat 💬</h3>
+      <div id="chatBox" style="height: 200px; background:#0f172a; padding:10px; overflow-y:auto; border-radius:6px; text-align:left; font-size:0.9rem;"></div>
+      <input type="text" id="chatUser" placeholder="আপনার নাম">
+      <input type="text" id="chatMsg" placeholder="মেসেজ টাইপ করুন...">
+      <button class="btn" onclick="sendChat()">Send</button>
     </div>
+  </div>
 
-</nav>
-
-
-<!-- HOME -->
-<section class="hero" id="home">
-
-    <div>
-
-        <h1>
-            Hi, I'm <span>Arif Broh</span>
-        </h1>
-
-        <p>
-            Welcome to my personal portfolio.
-            I am passionate about technology,
-            web development and creative digital projects.
-        </p>
-
-        <a class="btn" href="#contact">
-            Contact Me
-        </a>
-
+  <!-- 3. Photo Filter -->
+  <div id="m-photo" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('m-photo')">✕</span>
+      <h3>Photo Editor 🎨</h3>
+      <input type="file" accept="image/*" onchange="loadImg(event)">
+      <img id="pImg" src="https://via.placeholder.com/250x150?text=Upload+Image" style="max-width:100%; border-radius:6px; margin:10px 0;">
+      <label>Brightness: <input type="range" id="br" min="0" max="200" value="100" oninput="applyF()"></label>
+      <label>Grayscale: <input type="range" id="gr" min="0" max="100" value="0" oninput="applyF()"></label>
     </div>
+  </div>
 
-</section>
-
-
-<!-- ABOUT -->
-<section id="about">
-
-    <h2 class="title">
-        About Me
-    </h2>
-
-    <div class="about">
-
-        <p>
-            Hello! I'm Arif Broh. I enjoy learning about
-            modern technology and creating interesting
-            digital projects. This website showcases
-            my skills, projects and online work.
-        </p>
-
+  <!-- 4. Text to Speech -->
+  <div id="m-tts" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('m-tts')">✕</span>
+      <h3>Voice Converter 🔊</h3>
+      <textarea id="ttsTxt" rows="4" placeholder="এখানে কিছু লিখুন..."></textarea>
+      <button class="btn" onclick="speakTxt()">উচ্চারণ করে শোনাও</button>
     </div>
+  </div>
 
-</section>
-
-
-<!-- SKILLS -->
-<section id="skills">
-
-    <h2 class="title">
-        My Skills
-    </h2>
-
-    <div class="cards">
-
-        <div class="card">
-
-            <div class="icon">💻</div>
-
-            <h3>
-                Web Development
-            </h3>
-
-            <p>
-                Creating modern and responsive websites
-                using HTML, CSS and JavaScript.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="icon">🎨</div>
-
-            <h3>
-                Web Design
-            </h3>
-
-            <p>
-                Designing clean, modern and
-                user-friendly interfaces.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="icon">⚡</div>
-
-            <h3>
-                Digital Projects
-            </h3>
-
-            <p>
-                Building creative digital projects
-                and learning new technologies.
-            </p>
-
-        </div>
-
+  <!-- 5. QR Generator -->
+  <div id="m-qr" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('m-qr')">✕</span>
+      <h3>QR Code Generator 📱</h3>
+      <input type="text" id="qrInp" placeholder="লিংক বা লিখা পেস্ট করুন">
+      <button class="btn" onclick="makeQR()">QR তৈরি করুন</button>
+      <div id="qrBox" style="margin-top:15px;"></div>
     </div>
+  </div>
 
-</section>
-
-
-<!-- PROJECTS -->
-<section id="projects">
-
-    <h2 class="title">
-        My Projects
-    </h2>
-
-    <div class="project">
-
-        <div class="project-box">
-
-            <h3>
-                Personal Portfolio
-            </h3>
-
-            <p>
-                A modern responsive portfolio website
-                created with HTML and CSS.
-            </p>
-
-        </div>
-
-
-        <div class="project-box">
-
-            <h3>
-                Web Design Project
-            </h3>
-
-            <p>
-                A clean and responsive website design
-                for modern devices.
-            </p>
-
-        </div>
-
+  <!-- 6. Calculator -->
+  <div id="m-calc" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('m-calc')">✕</span>
+      <h3>Calculator 🔢</h3>
+      <input type="text" id="cScr" readonly style="text-align:right; font-size:1.2rem; color:#4ade80;">
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:5px; margin-top:10px;">
+        <button class="btn" onclick="cP('C')">C</button>
+        <button class="btn" onclick="cP('/')">/</button>
+        <button class="btn" onclick="cP('*')">*</button>
+        <button class="btn" onclick="cP('-')">-</button>
+        <button class="btn" onclick="cP('7')">7</button>
+        <button class="btn" onclick="cP('8')">8</button>
+        <button class="btn" onclick="cP('9')">9</button>
+        <button class="btn" onclick="cP('+')">+</button>
+        <button class="btn" onclick="cP('4')">4</button>
+        <button class="btn" onclick="cP('5')">5</button>
+        <button class="btn" onclick="cP('6')">6</button>
+        <button class="btn" onclick="cCalc()">=</button>
+        <button class="btn" onclick="cP('1')">1</button>
+        <button class="btn" onclick="cP('2')">2</button>
+        <button class="btn" onclick="cP('3')">3</button>
+        <button class="btn" onclick="cP('0')">0</button>
+      </div>
     </div>
+  </div>
 
-</section>
+  <!-- 7. Quick Notes -->
+  <div id="m-notes" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('m-notes')">✕</span>
+      <h3>Quick Notes 📝</h3>
+      <textarea id="myNote" rows="8" oninput="saveN()" placeholder="আপনার নোট লিখুন (অটো সেভ হবে)..."></textarea>
+    </div>
+  </div>
 
+  <!-- 8. Age Calculator -->
+  <div id="m-age" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('m-age')">✕</span>
+      <h3>Age Calculator 📅</h3>
+      <input type="date" id="dobInp">
+      <button class="btn" onclick="getAge()">হিসাব করুন</button>
+      <h4 id="ageRes" style="margin-top:15px; color:#4ade80;"></h4>
+    </div>
+  </div>
 
-<!-- CONTACT -->
-<section id="contact" class="contact">
+  <!-- 9. Stopwatch -->
+  <div id="m-watch" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('m-watch')">✕</span>
+      <h3>Stopwatch ⏱️</h3>
+      <h1 id="swDisp" style="font-size:2.5rem; color:#38bdf8; margin:15px 0;">00:00:00</h1>
+      <button class="btn" onclick="swStart()" style="background:#4ade80;">Start</button>
+      <button class="btn" onclick="swStop()" style="background:#facc15;">Stop</button>
+      <button class="btn" onclick="swReset()" style="background:#ef4444; color:#fff;">Reset</button>
+    </div>
+  </div>
 
-    <h2 class="title">
-        Contact Me
-    </h2>
+  <!-- 10. To-Do List -->
+  <div id="m-todo" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('m-todo')">✕</span>
+      <h3>To-Do List ✅</h3>
+      <input type="text" id="todoInp" placeholder="নতুন কাজ...">
+      <button class="btn" onclick="addTodo()">যোগ করুন</button>
+      <ul id="todoList" style="list-style:none; text-align:left; margin-top:15px;"></ul>
+    </div>
+  </div>
 
-    <p>
-        📧 Email: your-email@example.com
-    </p>
+  <!-- 11. Password Generator -->
+  <div id="m-pass" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('m-pass')">✕</span>
+      <h3>Password Generator 🔐</h3>
+      <div id="passRes" style="font-size:1.2rem; background:#0f172a; padding:10px; border-radius:6px; margin:15px 0; color:#4ade80;">পাসওয়ার্ড এখানে আসবে</div>
+      <button class="btn" onclick="genP()">নতুন পাসওয়ার্ড তৈরি করুন</button>
+    </div>
+  </div>
 
-    <p>
-        🌐 GitHub: github.com/arifbrohmca
-    </p>
+  <!-- 12. Unit Converter -->
+  <div id="m-unit" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('m-unit')">✕</span>
+      <h3>Meter to Feet Converter 📏</h3>
+      <input type="number" id="mInp" placeholder="মিটার লিখুন" oninput="mToF()">
+      <h4 style="margin-top:15px;">ফুট: <span id="fRes" style="color:#4ade80;">0</span> feet</h4>
+    </div>
+  </div>
 
-    <a
-        class="btn"
-        href="mailto:your-email@example.com">
-        Send Email
-    </a>
+  <!-- 13. Color Picker -->
+  <div id="m-color" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('m-color')">✕</span>
+      <h3>Color Picker 🎨</h3>
+      <input type="color" id="clrInp" value="#38bdf8" style="height:60px; cursor:pointer;" oninput="pickC()">
+      <h3 id="clrCode" style="margin-top:10px; color:#38bdf8;">#38bdf8</h3>
+    </div>
+  </div>
 
-</section>
+  <!-- 14. Tic Tac Toe -->
+  <div id="m-ttt" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('m-ttt')">✕</span>
+      <h3>Tic Tac Toe ❌⭕</h3>
+      <div id="tttBoard" style="display:grid; grid-template-columns:repeat(3,70px); gap:5px; justify-content:center; margin-top:15px;"></div>
+    </div>
+  </div>
 
+  <!-- 15. Coin Flip -->
+  <div id="m-coin" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('m-coin')">✕</span>
+      <h3>Coin Flip 🪙</h3>
+      <h1 id="coinRes" style="font-size:3rem; margin:20px 0;">HEADS</h1>
+      <button class="btn" onclick="flipC()">কয়েন টস করুন</button>
+    </div>
+  </div>
 
-<!-- FOOTER -->
-<footer>
+  <!-- JAVASCRIPT ENGINE -->
+  <script>
+    // Modal controls
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-    © 2026 Arif Broh — All Rights Reserved.
+    // 1. Snake Game Logic
+    const cvs = document.getElementById("gc"), ctx = cvs.getContext("2d");
+    let box = 14, snake = [{x: 9*box, y: 10*box}], dir = "", food = {x: Math.floor(Math.random()*19+1)*box, y: Math.floor(Math.random()*19+1)*box};
+    function pDir(d){ if(d=='LEFT'&&dir!='RIGHT')dir='LEFT'; else if(d=='UP'&&dir!='DOWN')dir='UP'; else if(d=='RIGHT'&&dir!='LEFT')dir='RIGHT'; else if(d=='DOWN'&&dir!='UP')dir='DOWN'; }
+    document.addEventListener("keydown", e => { if(e.keyCode==37)pDir('LEFT'); else if(e.keyCode==38)pDir('UP'); else if(e.keyCode==39)pDir('RIGHT'); else if(e.keyCode==40)pDir('DOWN'); });
+    function drawG(){
+      ctx.fillStyle = "#000"; ctx.fillRect(0,0,cvs.width,cvs.height);
+      for(let i=0; i<snake.length; i++){ ctx.fillStyle = (i==0)?"#38bdf8":"#fff"; ctx.fillRect(snake[i].x, snake[i].y, box, box); }
+      ctx.fillStyle = "#ef4444"; ctx.fillRect(food.x, food.y, box, box);
+      let sX = snake[0].x, sY = snake[0].y;
+      if(dir=="LEFT")sX-=box; if(dir=="UP")sY-=box; if(dir=="RIGHT")sX+=box; if(dir=="DOWN")sY+=box;
+      if(sX==food.x && sY==food.y){ food = {x: Math.floor(Math.random()*19+1)*box, y: Math.floor(Math.random()*19+1)*box}; } else { snake.pop(); }
+      let nHead = {x:sX, y:sY};
+      if(sX<0 || sX>=cvs.width || sY<0 || sY>=cvs.height){ snake=[{x:9*box, y:10*box}]; dir=""; }
+      snake.unshift(nHead);
+    }
+    setInterval(drawG, 120);
 
-</footer>
+    // 2. Chat
+    let chats = JSON.parse(localStorage.getItem('hub_chat')) || [];
+    function renderC(){ document.getElementById('chatBox').innerHTML = chats.map(c=>`<div><b style="color:#38bdf8;">${c.u}:</b> ${c.m}</div>`).join(''); }
+    function sendChat(){
+      let u = document.getElementById('chatUser').value || 'User', m = document.getElementById('chatMsg').value;
+      if(!m) return; chats.push({u, m}); localStorage.setItem('hub_chat', JSON.stringify(chats));
+      document.getElementById('chatMsg').value = ''; renderC();
+    } renderC();
 
+    // 3. Photo Filter
+    function loadImg(e){ document.getElementById('pImg').src = URL.createObjectURL(e.target.files[0]); }
+    function applyF(){
+      let b = document.getElementById('br').value, g = document.getElementById('gr').value;
+      document.getElementById('pImg').style.filter = `brightness(${b}%) grayscale(${g}%)`;
+    }
+
+    // 4. TTS
+    function speakTxt(){
+      let t = document.getElementById('ttsTxt').value;
+      if(t) window.speechSynthesis.speak(new SpeechSynthesisUtterance(t));
+    }
+
+    // 5. QR Generator
+    function makeQR(){
+      let v = document.getElementById('qrInp').value;
+      if(v) document.getElementById('qrBox').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(v)}"/>`;
+    }
+
+    // 6. Calculator
+    let cS = document.getElementById('cScr');
+    function cP(v){ if(v==='C') cS.value=''; else cS.value+=v; }
+    function cCalc(){ try{ cS.value=eval(cS.value); }catch{ cS.value='Error'; } }
+
+    // 7. Notes
+    let mN = document.getElementById('myNote');
+    mN.value = localStorage.getItem('hub_note') || '';
+    function saveN(){ localStorage.setItem('hub_note', mN.value); }
+
+    // 8. Age Calc
+    function getAge(){
+      let d = document.getElementById('dobInp').value;
+      if(d){
+        let diff = Date.now() - new Date(d).getTime();
+        document.getElementById('ageRes').innerText = "বয়স: " + Math.abs(new Date(diff).getUTCFullYear() - 1970) + " বছর";
+      }
+    }
+
+    // 9. Stopwatch
+    let swT, swSec=0;
+    function swStart(){ clearInterval(swT); swT = setInterval(()=>{ swSec++; document.getElementById('swDisp').innerText = new Date(swSec*1000).toISOString().substr(11,8); },1000); }
+    function swStop(){ clearInterval(swT); }
+    function swReset(){ clearInterval(swT); swSec=0; document.getElementById('swDisp').innerText="00:00:00"; }
+
+    // 10. To-Do
+    let todos = JSON.parse(localStorage.getItem('hub_todo')) || [];
+    function renderT(){ document.getElementById('todoList').innerHTML = todos.map((t,i)=>`<li style="background:#0f172a; padding:6px; margin:4px 0; border-radius:4px; display:flex; justify-between">${t} <span style="color:#ef4444; cursor:pointer;" onclick="delT(${i})">✕</span></li>`).join(''); }
+    function addTodo(){ let v = document.getElementById('todoInp').value; if(v){ todos.push(v); localStorage.setItem('hub_todo', JSON.stringify(todos)); document.getElementById('todoInp').value=''; renderT(); } }
+    function delT(i){ todos.splice(i,1); localStorage.setItem('hub_todo', JSON.stringify(todos)); renderT(); } renderT();
+
+    // 11. Password Gen
+    function genP(){
+      let ch = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()", p="";
+      for(let i=0;i<12;i++) p += ch.charAt(Math.floor(Math.random()*ch.length));
+      document.getElementById('passRes').innerText = p;
+    }
+
+    // 12. Unit Converter
+    function mToF(){ document.getElementById('fRes').innerText = (document.getElementById('mInp').value * 3.28084).toFixed(2); }
+
+    // 13. Color Picker
+    function pickC(){ document.getElementById('clrCode').innerText = document.getElementById('clrInp').value; }
+
+    // 14. Tic Tac Toe
+    let tP='X', tB=Array(9).fill('');
+    function renderTTT(){ document.getElementById('tttBoard').innerHTML = tB.map((v,i)=>`<div onclick="cTTT(${i})" style="width:70px; height:70px; background:#0f172a; display:flex; align-items:center; justify-content:center; font-size:1.8rem; cursor:pointer; border-radius:6px;">${v}</div>`).join(''); }
+    function cTTT(i){ if(!tB[i]){ tB[i]=tP; tP=tP==='X'?'O':'X'; renderTTT(); } } renderTTT();
+
+    // 15. Coin Flip
+    function flipC(){ document.getElementById('coinRes').innerText = Math.random() < 0.5 ? 'HEADS' : 'TAILS'; }
+  </script>
 </body>
-</html>
+      </html>
