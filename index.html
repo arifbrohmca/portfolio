@@ -1,532 +1,336 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arif Bro | All-in-One Web Hub</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background-color: #0f172a;
-      color: #fff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      padding: 20px;
-      text-align: center;
-    }
-    h1 { margin-bottom: 8px; color: #38bdf8; font-size: 2rem; }
-    p.subtitle { margin-bottom: 30px; color: #94a3b8; font-size: 1rem; }
-
-    /* Grid Layout for Tool Cards */
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .card {
-      background-color: #1e293b;
-      border: 1px solid #334155;
-      padding: 20px 10px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .card:hover {
-      border-color: #38bdf8;
-      transform: translateY(-5px);
-      background-color: #334155;
-      box-shadow: 0 10px 20px rgba(56, 189, 248, 0.15);
-    }
-
-    .card .icon { font-size: 2.2rem; margin-bottom: 10px; }
-    .card h3 { font-size: 1rem; color: #38bdf8; margin-bottom: 5px; }
-    .card p { font-size: 0.75rem; color: #cbd5e1; }
-
-    /* Modal / Popup Windows Styling */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(5px);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      padding: 10px;
-    }
-
-    .modal-content {
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 12px;
-      padding: 20px;
-      width: 100%;
-      max-width: 480px;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-      position: relative;
-      text-align: center;
-      max-height: 92vh;
-      overflow-y: auto;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5rem;
-      color: #ef4444;
-      cursor: pointer;
-      font-weight: bold;
-      z-index: 10;
-    }
-
-    /* Common Input/Button styles for tools */
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      background: #0f172a;
-      border: 1px solid #334155;
-      color: #fff;
-      border-radius: 6px;
-      outline: none;
-    }
-    button.btn {
-      padding: 10px 18px;
-      background: #38bdf8;
-      color: #0f172a;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 5px;
-    }
-
-    /* FRIENDBOOK STYLES (FB LITE LIKE) */
-    .fb-header { display: flex; justify-content: space-between; align-items: center; background: #0f172a; padding: 10px; border-radius: 8px; margin-bottom: 10px; }
-    .fb-title { color: #38bdf8; font-weight: bold; font-size: 1.2rem; }
-    .fb-nav { display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; }
-    .fb-nav button { background: #334155; border: none; color: #fff; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 0.85rem; }
-    .fb-nav button.active { background: #38bdf8; color: #0f172a; font-weight: bold; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friendbook Lite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    .cover-box { width: 100%; height: 110px; background: #334155; border-radius: 8px 8px 0 0; position: relative; background-size: cover; background-position: center; }
-    .prof-img { width: 70px; height: 70px; border-radius: 50%; border: 3px solid #1e293b; position: absolute; bottom: -25px; left: 15px; background: #0f172a; background-size: cover; background-position: center; }
-    .prof-info { text-align: left; margin-top: 30px; margin-bottom: 15px; padding: 0 10px; }
-    
-    .post-card { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 12px; margin-bottom: 12px; text-align: left; }
-    .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-    .post-header img { width: 35px; height: 35px; border-radius: 50%; }
-    .post-img { width: 100%; border-radius: 6px; margin-top: 8px; }
-  </style>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: #0f172a; color: #333; display: flex; justify-content: center; height: 100vh; overflow: hidden; }
+
+        .app-container {
+            width: 100%; max-width: 480px; background: #fff; height: 100vh;
+            display: flex; flex-direction: column; box-shadow: 0 0 15px rgba(0,0,0,0.3);
+        }
+
+        /* Authentication Screen */
+        .auth-screen { padding: 25px; display: flex; flex-direction: column; justify-content: center; height: 100%; text-align: center; background: #fff; }
+        .auth-screen h1 { color: #1877f2; margin-bottom: 5px; font-size: 36px; font-weight: 800; }
+        .auth-screen p { color: #65676b; margin-bottom: 25px; font-size: 14px; }
+        .auth-screen input { width: 100%; padding: 12px; margin: 6px 0; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; background: #f5f6f7; outline: none; }
+        .btn-main { background: #1877f2; color: #fff; border: none; padding: 12px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; width: 100%; }
+        .auth-toggle { margin-top: 18px; color: #1877f2; cursor: pointer; font-size: 14px; font-weight: 600; }
+
+        /* Main App Interface */
+        .main-app { display: none; flex-direction: column; height: 100%; }
+
+        /* Facebook Lite Header Navigation */
+        .top-nav { background: #1877f2; color: white; display: flex; justify-content: space-around; align-items: center; height: 50px; }
+        .top-nav div { position: relative; font-size: 20px; cursor: pointer; padding: 10px; flex: 1; text-align: center; opacity: 0.7; }
+        .top-nav div.active { opacity: 1; border-bottom: 3px solid #fff; }
+        .badge { position: absolute; top: 5px; right: 20%; background: #fa3e3e; color: white; font-size: 10px; border-radius: 50%; padding: 2px 6px; font-weight: bold; }
+
+        /* Content Views */
+        .content-area { flex: 1; overflow-y: auto; background: #f0f2f5; }
+        .tab-view { display: none; padding: 10px; }
+        .tab-view.active { display: block; }
+
+        /* Post Card Style */
+        .create-post { background: #fff; padding: 12px; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .create-post textarea { width: 100%; border: none; resize: none; outline: none; font-size: 15px; }
+        .post-card { background: #fff; border-radius: 8px; padding: 12px; margin-bottom: 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .post-header { display: flex; align-items: center; margin-bottom: 8px; }
+        .user-avatar { width: 40px; height: 40px; border-radius: 50%; background: #1877f2; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 10px; font-size: 18px; }
+        .post-author { font-weight: bold; font-size: 14px; }
+        .post-actions { display: flex; justify-content: space-around; border-top: 1px solid #eee; padding-top: 8px; margin-top: 8px; font-size: 13px; color: #606770; }
+        .post-actions div { cursor: pointer; }
+
+        /* Chat Item Style */
+        .chat-item { background: #fff; padding: 12px; border-radius: 8px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .chat-info { display: flex; align-items: center; }
+
+        /* Call Modal Overlay */
+        .call-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 999; color: #fff; text-align: center; flex-direction: column; justify-content: center; align-items: center; }
+        .video-box { width: 90%; height: 250px; background: #222; margin: 15px 0; border-radius: 12px; overflow: hidden; position: relative; }
+        video { width: 100%; height: 100%; object-fit: cover; }
+    </style>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 </head>
 <body>
 
-  <h1>Arif Bro Web Hub 🚀</h1>
-  <p class="subtitle">একই পেজে ১৫টি বিভিন্ন সার্ভিস! যেকোনো একটি ব্যবহার করুন:</p>
-
-  <!-- 15 Cards Grid -->
-  <div class="grid-container">
-    <div class="card" onclick="openModal('m-fb')"><div class="icon">🌐</div><h3>Friendbook</h3><p>সোশ্যাল মিডিয়া (FB Lite)</p></div>
-    <div class="card" onclick="openModal('m-snake')"><div class="icon">🐍</div><h3>Snake Game</h3><p>সাপ খেলা</p></div>
-    <div class="card" onclick="openModal('m-photo')"><div class="icon">🎨</div><h3>Photo Filter</h3><p>ছবি কালার ফিল্টার</p></div>
-    <div class="card" onclick="openModal('m-tts')"><div class="icon">🔊</div><h3>Voice Converter</h3><p>টেক্সট থেকে ভয়েস</p></div>
-    <div class="card" onclick="openModal('m-qr')"><div class="icon">📱</div><h3>QR Generator</h3><p>QR কোড তৈরি</p></div>
-    <div class="card" onclick="openModal('m-calc')"><div class="icon">🔢</div><h3>Calculator</h3><p>ক্যালকুলেটর</p></div>
-    <div class="card" onclick="openModal('m-notes')"><div class="icon">📝</div><h3>Quick Notes</h3><p>নোটপ্যাড</p></div>
-    <div class="card" onclick="openModal('m-age')"><div class="icon">📅</div><h3>Age Calculator</h3><p>বয়স হিসাব</p></div>
-    <div class="card" onclick="openModal('m-watch')"><div class="icon">⏱️</div><h3>Stopwatch</h3><p>স্টপওয়াচ</p></div>
-    <div class="card" onclick="openModal('m-todo')"><div class="icon">✅</div><h3>To-Do List</h3><p>কাজের তালিকা</p></div>
-    <div class="card" onclick="openModal('m-pass')"><div class="icon">🔐</div><h3>Password Generator</h3><p>পাসওয়ার্ড তৈরি</p></div>
-    <div class="card" onclick="openModal('m-unit')"><div class="icon">📏</div><h3>Unit Converter</h3><p>মিটার থেকে ফুট</p></div>
-    <div class="card" onclick="openModal('m-color')"><div class="icon">🎨</div><h3>Color Picker</h3><p>কালার কোড</p></div>
-    <div class="card" onclick="openModal('m-ttt')"><div class="icon">❌</div><h3>Tic Tac Toe</h3><p>টিক ট্যাক টো</p></div>
-    <div class="card" onclick="openModal('m-coin')"><div class="icon">🪙</div><h3>Coin Flip</h3><p>টস করুন</p></div>
-  </div>
-
-  <!-- MODALS -->
-
-  <!-- 1. FRIENDBOOK (FB LITE) -->
-  <div id="m-fb" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('m-fb')">✕</span>
-      
-      <div class="fb-header">
-        <div class="fb-title">Friendbook 🌐</div>
-        <div id="fbUserTag" style="font-size:0.8rem; color:#4ade80;">Guest User</div>
-      </div>
-
-      <div class="fb-nav">
-        <button class="active" onclick="switchFbTab('feed')">📰 Feed</button>
-        <button onclick="switchFbTab('profile')">👤 Profile</button>
-        <button onclick="switchFbTab('chat')">💬 Chat</button>
-      </div>
-
-      <!-- Tab 1: Feed -->
-      <div id="fbTabFeed">
-        <div style="background:#0f172a; padding:10px; border-radius:8px; margin-bottom:15px;">
-          <textarea id="fbPostText" rows="2" placeholder="মনে যা আছে লিখুন..."></textarea>
-          <input type="file" id="fbPostImg" accept="image/*" style="font-size:0.8rem;">
-          <button class="btn" onclick="createFbPost()" style="width:100%; margin-top:5px;">Post</button>
-        </div>
-        <div id="fbPostsContainer"></div>
-      </div>
-
-      <!-- Tab 2: Profile -->
-      <div id="fbTabProfile" style="display:none;">
-        <div class="cover-box" id="fbCoverBox">
-          <div class="prof-img" id="fbProfBox"></div>
-        </div>
-        <div class="prof-info">
-          <h3 id="fbNameDisp">Your Name</h3>
-          <p id="fbBioDisp" style="font-size:0.8rem; color:#94a3b8;">No bio added</p>
-        </div>
-        <div style="background:#0f172a; padding:10px; border-radius:8px; text-align:left;">
-          <h4 style="font-size:0.9rem; margin-bottom:5px; color:#38bdf8;">Profile Settings</h4>
-          <input type="text" id="fbNameInp" placeholder="আপনার নাম">
-          <input type="text" id="fbBioInp" placeholder="বায়ো লিখুন">
-          <label style="font-size:0.75rem;">Profile Picture:</label>
-          <input type="file" id="fbProfInp" accept="image/*">
-          <label style="font-size:0.75rem;">Cover Picture:</label>
-          <input type="file" id="fbCoverInp" accept="image/*">
-          <button class="btn" onclick="saveFbProfile()" style="width:100%;">Save Profile</button>
-        </div>
-      </div>
-
-      <!-- Tab 3: Chat -->
-      <div id="fbTabChat" style="display:none;">
-        <div id="fbChatBox" style="height: 220px; background:#0f172a; padding:10px; overflow-y:auto; border-radius:6px; text-align:left; font-size:0.9rem; margin-bottom:8px;"></div>
-        <input type="text" id="fbChatMsg" placeholder="মেসেজ লিখুন...">
-        <button class="btn" onclick="sendFbChat()" style="width:100%;">Send Message</button>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- 2. Snake Game -->
-  <div id="m-snake" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('m-snake')">✕</span>
-      <h3>Snake Game 🐍</h3>
-      <canvas id="gc" width="280" height="280" style="background:#000; margin-top:10px; border-radius:8px;"></canvas>
-      <div style="margin-top:10px;">
-        <button class="btn" onclick="pDir('UP')">⬆️</button><br>
-        <button class="btn" onclick="pDir('LEFT')">⬅️</button>
-        <button class="btn" onclick="pDir('DOWN')">⬇️</button>
-        <button class="btn" onclick="pDir('RIGHT')">➡️</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3. Photo Filter -->
-  <div id="m-photo" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('m-photo')">✕</span>
-      <h3>Photo Editor 🎨</h3>
-      <input type="file" accept="image/*" onchange="loadImg(event)">
-      <img id="pImg" src="https://via.placeholder.com/250x150?text=Upload+Image" style="max-width:100%; border-radius:6px; margin:10px 0;">
-      <label>Brightness: <input type="range" id="br" min="0" max="200" value="100" oninput="applyF()"></label>
-      <label>Grayscale: <input type="range" id="gr" min="0" max="100" value="0" oninput="applyF()"></label>
-    </div>
-  </div>
-
-  <!-- 4. Text to Speech -->
-  <div id="m-tts" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('m-tts')">✕</span>
-      <h3>Voice Converter 🔊</h3>
-      <textarea id="ttsTxt" rows="4" placeholder="এখানে কিছু লিখুন..."></textarea>
-      <button class="btn" onclick="speakTxt()">উচ্চারণ করে শোনাও</button>
-    </div>
-  </div>
-
-  <!-- 5. QR Generator -->
-  <div id="m-qr" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('m-qr')">✕</span>
-      <h3>QR Code Generator 📱</h3>
-      <input type="text" id="qrInp" placeholder="লিংক বা লিখা পেস্ট করুন">
-      <button class="btn" onclick="makeQR()">QR তৈরি করুন</button>
-      <div id="qrBox" style="margin-top:15px;"></div>
-    </div>
-  </div>
-
-  <!-- 6. Calculator -->
-  <div id="m-calc" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('m-calc')">✕</span>
-      <h3>Calculator 🔢</h3>
-      <input type="text" id="cScr" readonly style="text-align:right; font-size:1.2rem; color:#4ade80;">
-      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:5px; margin-top:10px;">
-        <button class="btn" onclick="cP('C')">C</button><button class="btn" onclick="cP('/')">/</button><button class="btn" onclick="cP('*')">*</button><button class="btn" onclick="cP('-')">-</button>
-        <button class="btn" onclick="cP('7')">7</button><button class="btn" onclick="cP('8')">8</button><button class="btn" onclick="cP('9')">9</button><button class="btn" onclick="cP('+')">+</button>
-        <button class="btn" onclick="cP('4')">4</button><button class="btn" onclick="cP('5')">5</button><button class="btn" onclick="cP('6')">6</button><button class="btn" onclick="cCalc()">=</button>
-        <button class="btn" onclick="cP('1')">1</button><button class="btn" onclick="cP('2')">2</button><button class="btn" onclick="cP('3')">3</button><button class="btn" onclick="cP('0')">0</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 7. Quick Notes -->
-  <div id="m-notes" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('m-notes')">✕</span>
-      <h3>Quick Notes 📝</h3>
-      <textarea id="myNote" rows="8" oninput="saveN()" placeholder="আপনার নোট লিখুন (অটো সেভ হবে)..."></textarea>
-    </div>
-  </div>
-
-  <!-- 8. Age Calculator -->
-  <div id="m-age" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('m-age')">✕</span>
-      <h3>Age Calculator 📅</h3>
-      <input type="date" id="dobInp">
-      <button class="btn" onclick="getAge()">হিসাব করুন</button>
-      <h4 id="ageRes" style="margin-top:15px; color:#4ade80;"></h4>
-    </div>
-  </div>
-
-  <!-- 9. Stopwatch -->
-  <div id="m-watch" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('m-watch')">✕</span>
-      <h3>Stopwatch ⏱️</h3>
-      <h1 id="swDisp" style="font-size:2.5rem; color:#38bdf8; margin:15px 0;">00:00:00</h1>
-      <button class="btn" onclick="swStart()" style="background:#4ade80;">Start</button>
-      <button class="btn" onclick="swStop()" style="background:#facc15;">Stop</button>
-      <button class="btn" onclick="swReset()" style="background:#ef4444; color:#fff;">Reset</button>
-    </div>
-  </div>
-
-  <!-- 10. To-Do List -->
-  <div id="m-todo" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('m-todo')">✕</span>
-      <h3>To-Do List ✅</h3>
-      <input type="text" id="todoInp" placeholder="নতুন কাজ...">
-      <button class="btn" onclick="addTodo()">যোগ করুন</button>
-      <ul id="todoList" style="list-style:none; text-align:left; margin-top:15px;"></ul>
-    </div>
-  </div>
-
-  <!-- 11. Password Generator -->
-  <div id="m-pass" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('m-pass')">✕</span>
-      <h3>Password Generator 🔐</h3>
-      <div id="passRes" style="font-size:1.2rem; background:#0f172a; padding:10px; border-radius:6px; margin:15px 0; color:#4ade80;">পাসওয়ার্ড এখানে আসবে</div>
-      <button class="btn" onclick="genP()">নতুন পাসওয়ার্ড তৈরি করুন</button>
-    </div>
-  </div>
-
-  <!-- 12. Unit Converter -->
-  <div id="m-unit" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('m-unit')">✕</span>
-      <h3>Meter to Feet Converter 📏</h3>
-      <input type="number" id="mInp" placeholder="মিটার লিখুন" oninput="mToF()">
-      <h4 style="margin-top:15px;">ফুট: <span id="fRes" style="color:#4ade80;">0</span> feet</h4>
-    </div>
-  </div>
-
-  <!-- 13. Color Picker -->
-  <div id="m-color" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('m-color')">✕</span>
-      <h3>Color Picker 🎨</h3>
-      <input type="color" id="clrInp" value="#38bdf8" style="height:60px; cursor:pointer;" oninput="pickC()">
-      <h3 id="clrCode" style="margin-top:10px; color:#38bdf8;">#38bdf8</h3>
-    </div>
-  </div>
-
-  <!-- 14. Tic Tac Toe -->
-  <div id="m-ttt" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('m-ttt')">✕</span>
-      <h3>Tic Tac Toe ❌⭕</h3>
-      <div id="tttBoard" style="display:grid; grid-template-columns:repeat(3,70px); gap:5px; justify-content:center; margin-top:15px;"></div>
-    </div>
-  </div>
-
-  <!-- 15. Coin Flip -->
-  <div id="m-coin" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('m-coin')">✕</span>
-      <h3>Coin Flip 🪙</h3>
-      <h1 id="coinRes" style="font-size:3rem; margin:20px 0;">HEADS</h1>
-      <button class="btn" onclick="flipC()">কয়েন টস করুন</button>
-    </div>
-  </div>
-
-  <!-- JAVASCRIPT ENGINE -->
-  <script>
-    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-    /* --- FRIENDBOOK SYSTEM ENGINE --- */
-    let fbProfile = JSON.parse(localStorage.getItem('fb_profile')) || { name: 'Arif User', bio: 'Welcome to Friendbook!', profImg: '', coverImg: '' };
-    let fbPosts = JSON.parse(localStorage.getItem('fb_posts')) || [];
-    let fbChats = JSON.parse(localStorage.getItem('fb_chats')) || [];
-
-    function updateFbProfileUI() {
-      document.getElementById('fbUserTag').innerText = fbProfile.name;
-      document.getElementById('fbNameDisp').innerText = fbProfile.name;
-      document.getElementById('fbBioDisp').innerText = fbProfile.bio;
-      if(fbProfile.profImg) document.getElementById('fbProfBox').style.backgroundImage = `url(${fbProfile.profImg})`;
-      if(fbProfile.coverImg) document.getElementById('fbCoverBox').style.backgroundImage = `url(${fbProfile.coverImg})`;
-    }
-
-    function switchFbTab(tab) {
-      document.getElementById('fbTabFeed').style.display = tab === 'feed' ? 'block' : 'none';
-      document.getElementById('fbTabProfile').style.display = tab === 'profile' ? 'block' : 'none';
-      document.getElementById('fbTabChat').style.display = tab === 'chat' ? 'block' : 'none';
-      renderFbPosts(); renderFbChats();
-    }
-
-    function saveFbProfile() {
-      let name = document.getElementById('fbNameInp').value;
-      let bio = document.getElementById('fbBioInp').value;
-      let profFile = document.getElementById('fbProfInp').files[0];
-      let coverFile = document.getElementById('fbCoverInp').files[0];
-
-      if(name) fbProfile.name = name;
-      if(bio) fbProfile.bio = bio;
-
-      let reader1 = new FileReader();
-      let reader2 = new FileReader();
-
-      if(profFile) {
-        reader1.onload = function(e){ fbProfile.profImg = e.target.result; finishSave(); }
-        reader1.readAsDataURL(profFile);
-      } else if(coverFile) {
-        reader2.onload = function(e){ fbProfile.coverImg = e.target.result; finishSave(); }
-        reader2.readAsDataURL(coverFile);
-      } else { finishSave(); }
-
-      function finishSave() {
-        localStorage.setItem('fb_profile', JSON.stringify(fbProfile));
-        updateFbProfileUI();
-        alert('প্রোফাইল সেভ হয়েছে!');
-      }
-    }
-
-    function createFbPost() {
-      let txt = document.getElementById('fbPostText').value;
-      let imgFile = document.getElementById('fbPostImg').files[0];
-      if(!txt && !imgFile) return alert('কিছু লিখুন বা ছবি দিন');
-
-      if(imgFile) {
-        let r = new FileReader();
-        r.onload = function(e) {
-          fbPosts.unshift({ user: fbProfile.name, userPic: fbProfile.profImg, text: txt, img: e.target.result, time: 'Just now' });
-          savePosts();
-        }
-        r.readAsDataURL(imgFile);
-      } else {
-        fbPosts.unshift({ user: fbProfile.name, userPic: fbProfile.profImg, text: txt, img: '', time: 'Just now' });
-        savePosts();
-      }
-      function savePosts() {
-        localStorage.setItem('fb_posts', JSON.stringify(fbPosts));
-        document.getElementById('fbPostText').value = '';
-        renderFbPosts();
-      }
-    }
-
-    function renderFbPosts() {
-      let cont = document.getElementById('fbPostsContainer');
-      cont.innerHTML = fbPosts.map(p => `
-        <div class="post-card">
-          <div class="post-header">
-            <img src="${p.userPic || 'https://via.placeholder.com/35'}" />
-            <div><b>${p.user}</b><br><small style="color:#94a3b8;">${p.time}</small></div>
-          </div>
-          <p style="font-size:0.9rem;">${p.text}</p>
-          ${p.img ? `<img src="${p.img}" class="post-img" />` : ''}
-        </div>
-      `).join('');
-    }
-
-    function sendFbChat() {
-      let msg = document.getElementById('fbChatMsg').value;
-      if(!msg) return;
-      fbChats.push({ user: fbProfile.name, text: msg });
-      localStorage.setItem('fb_chats', JSON.stringify(fbChats));
-      document.getElementById('fbChatMsg').value = '';
-      renderFbChats();
-    }
-
-    function renderFbChats() {
-      let box = document.getElementById('fbChatBox');
-      box.innerHTML = fbChats.map(c => `<div><b style="color:#38bdf8;">${c.user}:</b> ${c.text}</div>`).join('');
-      box.scrollTop = box.scrollHeight;
-    }
-    updateFbProfileUI();
-    renderFbPosts();
-
-    /* --- OTHER TOOLS LOGIC --- */
-    const cvs = document.getElementById("gc"), ctx = cvs.getContext("2d");
-    let box = 14, snake = [{x: 9*box, y: 10*box}], dir = "", food = {x: Math.floor(Math.random()*19+1)*box, y: Math.floor(Math.random()*19+1)*box};
-    function pDir(d){ if(d=='LEFT'&&dir!='RIGHT')dir='LEFT'; else if(d=='UP'&&dir!='DOWN')dir='UP'; else if(d=='RIGHT'&&dir!='LEFT')dir='RIGHT'; else if(d=='DOWN'&&dir!='UP')dir='DOWN'; }
-    document.addEventListener("keydown", e => { if(e.keyCode==37)pDir('LEFT'); else if(e.keyCode==38)pDir('UP'); else if(e.keyCode==39)pDir('RIGHT'); else if(e.keyCode==40)pDir('DOWN'); });
-    function drawG(){
-      ctx.fillStyle = "#000"; ctx.fillRect(0,0,cvs.width,cvs.height);
-      for(let i=0; i<snake.length; i++){ ctx.fillStyle = (i==0)?"#38bdf8":"#fff"; ctx.fillRect(snake[i].x, snake[i].y, box, box); }
-      ctx.fillStyle = "#ef4444"; ctx.fillRect(food.x, food.y, box, box);
-      let sX = snake[0].x, sY = snake[0].y;
-      if(dir=="LEFT")sX-=box; if(dir=="UP")sY-=box; if(dir=="RIGHT")sX+=box; if(dir=="DOWN")sY+=box;
-      if(sX==food.x && sY==food.y){ food = {x: Math.floor(Math.random()*19+1)*box, y: Math.floor(Math.random()*19+1)*box}; } else { snake.pop(); }
-      let nHead = {x:sX, y:sY};
-      if(sX<0 || sX>=cvs.width || sY<0 || sY>=cvs.height){ snake=[{x:9*box, y:10*box}]; dir=""; }
-      snake.unshift(nHead);
-    }
-    setInterval(drawG, 120);
-
-    function loadImg(e){ document.getElementById('pImg').src = URL.createObjectURL(e.target.files[0]); }
-    function applyF(){ document.getElementById('pImg').style.filter = `brightness(${document.getElementById('br').value}%) grayscale(${document.getElementById('gr').value}%)`; }
-    function speakTxt(){ if(document.getElementById('ttsTxt').value) window.speechSynthesis.speak(new SpeechSynthesisUtterance(document.getElementById('ttsTxt').value)); }
-    function makeQR(){ if(document.getElementById('qrInp').value) document.getElementById('qrBox').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(document.getElementById('qrInp').value)}"/>`; }
+<div class="app-container">
     
-    let cS = document.getElementById('cScr');
-    function cP(v){ if(v==='C') cS.value=''; else cS.value+=v; }
-    function cCalc(){ try{ cS.value=eval(cS.value); }catch{ cS.value='Error'; } }
+    <div id="authScreen" class="auth-screen">
+        <h1>Friendbook</h1>
+        <p>সবার সাথে যুক্ত থাকুন সহজ উপায়ে</p>
 
-    let mN = document.getElementById('myNote');
-    mN.value = localStorage.getItem('hub_note') || '';
-    function saveN(){ localStorage.setItem('hub_note', mN.value); }
+        <div id="registerForm">
+            <input type="text" id="regName" placeholder="আপনার পূর্ণ নাম">
+            <input type="date" id="regDob">
+            <input type="email" id="regEmail" placeholder="জিমেইল এড্রেস">
+            <input type="password" id="regPass" placeholder="নতুন পাসওয়ার্ড">
+            <button class="btn-main" onclick="handleRegister()">একাউন্ট খুলুন</button>
+            <div class="auth-toggle" onclick="toggleAuth(false)">ইতোমধ্যে একাউন্ট আছে? লগইন করুন</div>
+        </div>
 
-    function getAge(){
-      let d = document.getElementById('dobInp').value;
-      if(d) document.getElementById('ageRes').innerText = "বয়স: " + Math.abs(new Date(Date.now() - new Date(d).getTime()).getUTCFullYear() - 1970) + " বছর";
+        <div id="loginForm" style="display: none;">
+            <input type="email" id="loginEmail" placeholder="জিমেইল এড্রেস">
+            <input type="password" id="loginPass" placeholder="পাসওয়ার্ড">
+            <button class="btn-main" onclick="handleLogin()">লগইন করুন</button>
+            <div class="auth-toggle" onclick="toggleAuth(true)">নতুন একাউন্ট খুলতে চান? রেজিস্টার করুন</div>
+        </div>
+    </div>
+
+    <div id="mainApp" class="main-app">
+        
+        <div class="top-nav">
+            <div class="active" onclick="switchTab('feedView', this)"><i class="fa-solid fa-house"></i></div>
+            <div onclick="switchTab('msgView', this)"><i class="fa-solid fa-message"></i><span class="badge">1</span></div>
+            <div onclick="switchTab('notifView', this)"><i class="fa-solid fa-bell"></i></div>
+            <div onclick="switchTab('menuView', this)"><i class="fa-solid fa-bars"></i></div>
+        </div>
+
+        <div class="content-area">
+            
+            <div id="feedView" class="tab-view active">
+                <div class="create-post">
+                    <textarea id="postContent" rows="2" placeholder="আপনার মনে কি আছে?"></textarea>
+                    <button class="btn-main" style="padding: 6px; font-size: 13px;" onclick="publishPost()">পোস্ট করুন</button>
+                </div>
+                <div id="feedList">
+                    </div>
+            </div>
+
+            <div id="msgView" class="tab-view">
+                <button class="btn-main" style="margin-bottom: 10px; background: #42b72a;" onclick="createGroup()">+ নতুন গ্রুপ চ্যাট তৈরি করুন</button>
+                <div id="chatList">
+                    </div>
+            </div>
+
+            <div id="notifView" class="tab-view">
+                <div class="chat-item">
+                    <div><b>Friendbook Team</b> আপনাকে স্বাগতম জানাচ্ছে!</div>
+                </div>
+            </div>
+
+            <div id="menuView" class="tab-view">
+                <div style="background: #fff; padding: 20px; border-radius: 8px; text-align: center;">
+                    <div id="profileAvatar" class="user-avatar" style="width: 60px; height: 60px; margin: 0 auto 10px; font-size: 24px;">U</div>
+                    <h3 id="profileName">ইউজার নেম</h3>
+                    <p id="profileEmail" style="color: #666; font-size: 13px; margin-top: 4px;"></p>
+                    <button class="btn-main" style="background: #fa3e3e; margin-top: 20px;" onclick="handleLogout()">লগআউট</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="callModal" class="call-modal">
+        <h3 id="callerTitle">কল হচ্ছে...</h3>
+        <div class="video-box">
+            <video id="remoteVideo" autoplay playsinline></video>
+            <video id="localVideo" autoplay playsinline muted style="width: 80px; height: 100px; position: absolute; bottom: 10px; right: 10px; border: 2px solid #fff;"></video>
+        </div>
+        <div>
+            <button class="btn-main" style="background: #42b72a; width: 100px; display: inline-block;" onclick="answerCall()">রিসিভ</button>
+            <button class="btn-main" style="background: #fa3e3e; width: 100px; display: inline-block;" onclick="endCall()">কাটুন</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // --- YOUR EXACT FIREBASE CONFIGURATION ---
+    const firebaseConfig = {
+        apiKey: "AIzaSyDU65a9yrGbvyynOE5w1BS8Owpo-...", // Your API Key linked
+        authDomain: "friendbook-a5cb3.firebaseapp.com",
+        projectId: "friendbook-a5cb3",
+        storageBucket: "friendbook-a5cb3.firebasestorage.app",
+        messagingSenderId: "616280900247",
+        appId: "1:616280900247:web:f72797b5ee901a...",
+        measurementId: "G-YN5F994ZMX",
+        databaseURL: "https://friendbook-a5cb3-default-rtdb.firebaseio.com"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.database();
+
+    // AUTH TOGGLE
+    function toggleAuth(showRegister) {
+        document.getElementById('registerForm').style.display = showRegister ? 'block' : 'none';
+        document.getElementById('loginForm').style.display = showRegister ? 'none' : 'block';
     }
 
-    let swT, swSec=0;
-    function swStart(){ clearInterval(swT); swT = setInterval(()=>{ swSec++; document.getElementById('swDisp').innerText = new Date(swSec*1000).toISOString().substr(11,8); },1000); }
-    function swStop(){ clearInterval(swT); }
-    function swReset(){ clearInterval(swT); swSec=0; document.getElementById('swDisp').innerText="00:00:00"; }
+    // REGISTER USER & SEND VERIFICATION EMAIL
+    function handleRegister() {
+        const name = document.getElementById('regName').value;
+        const email = document.getElementById('regEmail').value;
+        const pass = document.getElementById('regPass').value;
+        const dob = document.getElementById('regDob').value;
 
-    let todos = JSON.parse(localStorage.getItem('hub_todo')) || [];
-    function renderT(){ document.getElementById('todoList').innerHTML = todos.map((t,i)=>`<li style="background:#0f172a; padding:6px; margin:4px 0; border-radius:4px; display:flex; justify-between">${t} <span style="color:#ef4444; cursor:pointer;" onclick="delT(${i})">✕</span></li>`).join(''); }
-    function addTodo(){ let v = document.getElementById('todoInp').value; if(v){ todos.push(v); localStorage.setItem('hub_todo', JSON.stringify(todos)); document.getElementById('todoInp').value=''; renderT(); } }
-    function delT(i){ todos.splice(i,1); localStorage.setItem('hub_todo', JSON.stringify(todos)); renderT(); } renderT();
+        if(!name || !email || !pass) return alert("সবগুলো তথ্য সঠিকভাবে প্রদান করুন!");
 
-    function genP(){
-      let ch = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()", p="";
-      for(let i=0;i<12;i++) p += ch.charAt(Math.floor(Math.random()*ch.length));
-      document.getElementById('passRes').innerText = p;
+        auth.createUserWithEmailAndPassword(email, pass).then((userCredential) => {
+            const user = userCredential.user;
+            
+            user.sendEmailVerification().then(() => {
+                alert("আপনার জিমেইলে একটি কনফার্মেশন কোড/লিঙ্ক পাঠানো হয়েছে। দয়া করে ইমেইল ভেরিফাই করুন!");
+            });
+
+            db.ref('users/' + user.uid).set({
+                name: name,
+                email: email,
+                dob: dob
+            });
+
+            auth.signOut();
+            toggleAuth(false);
+        }).catch(err => alert(err.message));
     }
-    function mToF(){ document.getElementById('fRes').innerText = (document.getElementById('mInp').value * 3.28084).toFixed(2); }
-    function pickC(){ document.getElementById('clrCode').innerText = document.getElementById('clrInp').value; }
 
-    let tP='X', tB=Array(9).fill('');
-    function renderTTT(){ document.getElementById('tttBoard').innerHTML = tB.map((v,i)=>`<div onclick="cTTT(${i})" style="width:70px; height:70px; background:#0f172a; display:flex; align-items:center; justify-content:center; font-size:1.8rem; cursor:pointer; border-radius:6px;">${v}</div>`).join(''); }
-    function cTTT(i){ if(!tB[i]){ tB[i]=tP; tP=tP==='X'?'O':'X'; renderTTT(); } } renderTTT();
-    function flipC(){ document.getElementById('coinRes').innerText = Math.random() < 0.5 ? 'HEADS' : 'TAILS'; }
-  </script>
+    // LOGIN USER
+    function handleLogin() {
+        const email = document.getElementById('loginEmail').value;
+        const pass = document.getElementById('loginPass').value;
+
+        auth.signInWithEmailAndPassword(email, pass).then((res) => {
+            if(!res.user.emailVerified) {
+                alert("আপনার জিমেইল ভেরিফাই করা হয়নি! ইমেইল ইনবক্স চেক করে লিঙ্ক বা কোডে ক্লিক করুন।");
+                auth.signOut();
+            }
+        }).catch(err => alert(err.message));
+    }
+
+    // MONITOR LOGIN STATUS
+    auth.onAuthStateChanged((user) => {
+        if (user && user.emailVerified) {
+            document.getElementById('authScreen').style.display = 'none';
+            document.getElementById('mainApp').style.display = 'flex';
+            
+            db.ref('users/' + user.uid).once('value', snap => {
+                const userData = snap.val();
+                if(userData) {
+                    document.getElementById('profileName').innerText = userData.name;
+                    document.getElementById('profileEmail').innerText = userData.email;
+                    document.getElementById('profileAvatar').innerText = userData.name.charAt(0).toUpperCase();
+                }
+            });
+            loadFeed();
+            loadChats();
+        } else {
+            document.getElementById('authScreen').style.display = 'flex';
+            document.getElementById('mainApp').style.display = 'none';
+        }
+    });
+
+    function handleLogout() { auth.signOut(); }
+
+    // TAB NAVIGATION
+    function switchTab(tabId, el) {
+        document.querySelectorAll('.tab-view').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.top-nav div').forEach(nav => nav.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        el.classList.add('active');
+    }
+
+    // POST SYSTEM
+    function publishPost() {
+        const text = document.getElementById('postContent').value;
+        const user = auth.currentUser;
+        if(!text) return;
+
+        db.ref('users/' + user.uid).once('value', snap => {
+            const userName = snap.val() ? snap.val().name : "User";
+            db.ref('posts').push({
+                uid: user.uid,
+                author: userName,
+                content: text,
+                likes: 0,
+                timestamp: Date.now()
+            });
+            document.getElementById('postContent').value = '';
+        });
+    }
+
+    function loadFeed() {
+        db.ref('posts').on('value', snapshot => {
+            const feedList = document.getElementById('feedList');
+            feedList.innerHTML = '';
+            const data = snapshot.val();
+            if(data) {
+                Object.keys(data).reverse().forEach(key => {
+                    const post = data[key];
+                    feedList.innerHTML += `
+                        <div class="post-card">
+                            <div class="post-header">
+                                <div class="user-avatar">${post.author.charAt(0).toUpperCase()}</div>
+                                <div class="post-author">${post.author}</div>
+                            </div>
+                            <div style="font-size: 14px; margin-bottom: 8px; color: #1c1e21;">${post.content}</div>
+                            <div class="post-actions">
+                                <div onclick="likePost('${key}', ${post.likes || 0})"><i class="fa-regular fa-thumbs-up"></i> ${post.likes || 0} Like</div>
+                                <div><i class="fa-regular fa-comment"></i> Comment</div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+        });
+    }
+
+    function likePost(postId, currentLikes) {
+        db.ref('posts/' + postId).update({ likes: currentLikes + 1 });
+    }
+
+    // CHAT SYSTEM
+    function loadChats() {
+        const chatList = document.getElementById('chatList');
+        chatList.innerHTML = `
+            <div class="chat-item">
+                <div class="chat-info">
+                    <div class="user-avatar" style="background:#42b72a;">G</div>
+                    <div>
+                        <b>Global Community Chat</b>
+                        <div style="font-size:12px; color:#666;">সবাই একসাথে কথা বলুন</div>
+                    </div>
+                </div>
+                <div>
+                    <i class="fa-solid fa-phone" onclick="startCall('audio')" style="margin-right:15px; color:#1877f2;"></i>
+                    <i class="fa-solid fa-video" onclick="startCall('video')" style="color:#1877f2;"></i>
+                </div>
+            </div>
+        `;
+    }
+
+    function createGroup() {
+        const groupName = prompt("নতুন গ্রুপের নাম লিখুন:");
+        if(groupName) alert(`"${groupName}" গ্রুপ তৈরি হয়েছে!`);
+    }
+
+    // CALL SYSTEM (AUDIO / VIDEO)
+    let localStream;
+    function startCall(type) {
+        document.getElementById('callModal').style.display = 'flex';
+        document.getElementById('callerTitle').innerText = (type === 'video' ? 'ভিডিও' : 'অডিও') + " কল হচ্ছে...";
+        navigator.mediaDevices.getUserMedia({ video: type === 'video', audio: true })
+            .then(stream => {
+                localStream = stream;
+                document.getElementById('localVideo').srcObject = stream;
+            }).catch(err => alert("ক্যামেরা/মাইক্রোফোন অ্যাক্সেস পাওয়া যায়নি!"));
+    }
+
+    function answerCall() { document.getElementById('callerTitle').innerText = "সংযুক্ত হয়েছে"; }
+    function endCall() {
+        if(localStream) localStream.getTracks().forEach(track => track.stop());
+        document.getElementById('callModal').style.display = 'none';
+    }
+</script>
+
 </body>
 </html>
